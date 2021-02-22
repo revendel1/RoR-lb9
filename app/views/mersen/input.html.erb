@@ -1,0 +1,9 @@
+<h1>Mersen#input</h1>
+<p>Введите значение:</p>
+<%= form_tag("/mersen/view", :method => "get") do %>
+    <%= label_tag("Значение:") %>
+    <%= text_field_tag(:val)%> <br/>
+
+    <br/>
+    <%= submit_tag("Найти числа") %>
+<% end %>

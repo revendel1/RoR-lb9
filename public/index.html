@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;
+    charset=utf-8" />
+    <script>
+        mersen_url =  location.protocol + "//" + location.host + "/mersen/view.json"
+        function send_query(){
+            var frm = document.forms.mersen_form;
+
+            var val = frm.val.value
+            var param_str = `?val=${val}&commit=find`;
+
+            if (param_str == "") return false; 
+            var http_request = new XMLHttpRequest();
+            http_request.open("GET", mersen_url + param_str, true);
+            http_request.onreadystatechange = function () {
+                var done = 4, ok = 200;
+                if (http_request.readyState == done &&
+                    http_request.status == ok) {
+                    var my_JSON_object =
+                    JSON.parse(http_request.responseText);
+                    show_result(my_JSON_object);
+                }
+            };
+            http_request.send(null);
+            return false; 
+
+        } 
+            function show_result(data) {
+                var count=0;
+                for (let arr of data.value) {
+                    count=count+1;
+                }
+                var res = document.querySelector("#count");
+                var string = document.createElement("label");
+                if (count>0) {
+                    string.innerHTML= `Количество: ${count}`;
+                } else {
+                    string.innerHTML= `Ошибка ввода.`;
+                }
+                res.innerHTML="";
+                res.append(string);
+                var table = document.querySelector("#result");
+                table.innerHTML = "<thead><tr><th>Номер</th><th>Число</th></tr></thead><tbody></tbody>"
+                var output = document.querySelector("#result tbody");
+                for (let arr of data.value) {
+                    var str = document.createElement("tr");
+                    str.innerHTML = `<td>${arr[0]}</td><td>${arr[1]}</td>`;
+                    output.append(str);
+                }
+            } 
+        
+    </script>
+</head>
+<body>
+    <h1>Mersen#input</h1>
+    <p>Введите значение:</p>
+    <form  name="mersen_form" accept-charset="UTF-8" method="get">
+        <label for="Value:">Значение:</label>
+        <input type="text" name="val" id="val"> 
+        <br>
+        <input type="submit" name="commit" value="Найти" onclick="return send_query();">
+    </form>
+    <br>
+    <p id="count"></p>
+    <table id="result" border="1"></table>
+</body>
+</html>
