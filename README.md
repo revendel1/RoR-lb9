@@ -1,24 +1,3 @@
-# README
+Условие: Простое число называется числом Мерсена, если оно может быть представлено в виде 2^p-1, где р-тоже простое число. Написать программу, которая определяет количество чисел Мерсена меньших или равных некоторому n (n вводится с клавиатуры). Вывести на печать числа Мерсена и их количество в указанном диапазоне.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+При помощи Javascript модифицировать код ЛР 8 таким образом, чтобы для отображения результатов вычисления браузер не выполнял полную перезагрузку страницы.
